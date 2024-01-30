@@ -1,3 +1,5 @@
+# Canvia el hostname de pc, i instala el ClientFog (i mono)
+
 HOSTNAME=$1
 while [[ -z $HOSTNAME ]] 
 do

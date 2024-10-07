@@ -11,6 +11,9 @@ cat << EOF > /usr/local/sbin/capaor
 
 if [ $1 == "up" ]; then
         echo "Capant internet..."
+        echo "Els alumnes han de configurar el proxy (o servidor intermediari) al Firefox:"
+        echo "  Proxy HTTP: 10.2.1.254   |  Port: 3128"
+        echo "  [v] Usar tambien para HTTPS"
         iptables -P FORWARD DROP
         iptables -D FORWARD -j ACCEPT 2> /dev/null
 elif [ $1 == "down" ]; then

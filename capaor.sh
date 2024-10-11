@@ -6,7 +6,7 @@ echo "  Els alumnes han de configurar el proxy (o servidor intermediari) al Fire
 echo "    * Proxy HTTP: 10.2.1.254   |  Port: 3128"
 echo "      [v] Usar tambien para HTTPS"
 apt update
-apt install squid
+apt install -y squid
 cat << EOF > /etc/squid/conf.d/capaor.conf
 acl PERMES dstdomain .gva.es
 http_access allow PERMES

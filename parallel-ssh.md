@@ -9,7 +9,7 @@
   ```
 2. Generar arxiu hosts
   ```bash
-  for i in {15..238}; do echo "10.2.1.$i"; done > hosts.txt
+  for i in {100..253}; do echo "10.2.1.$i"; done > hosts.txt
   ```
 3. Executar useradd en tots els hosts
   ```
@@ -17,3 +17,21 @@
   ```
 
   *(millor fer-ho amb clau publica)*
+
+4. Executar script:
+  ```
+  parallel-ssh -h hosts.txt -P -O StrictHostKeyChecking=no -I < script
+  ```
+
+## SCRIPTS:
+
+1. Obtenir la IP i SERIAL de cada ordinador de la xarxa:
+
+```
+#!/usr/bin/bash
+
+HIP=$(ip r | grep default | cut -d" " -f9) 
+HSERIAL=$(lshw -c System | grep serie | cut -d" " -f6)
+
+echo "YYYYYYYYYY $HIP,$HSERIAL"
+```

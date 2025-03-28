@@ -3,7 +3,7 @@ Scripts and bins
 
 ## ssx
 
-ssx < script
+  `ssx < script`
 
 Exemple script `hostinfo`:
   ```

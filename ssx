@@ -1,0 +1,37 @@
+#!/bin/bash
+
+DEFAULT_START_IP="10.2.1.100"
+DEFAULT_END_IP="10.2.1.253"
+
+if [ $# -ne 2 ]; then
+    start_ip=$DEFAULT_START_IP
+    end_ip=$DEFAULT_END_IP
+else
+    start_ip=$1
+    end_ip=$2
+fi
+
+ip_to_int() {
+    local ip="$1"
+    local a b c d
+    IFS=. read -r a b c d <<< "$ip"
+    echo $((a * 256 ** 3 + b * 256 ** 2 + c * 256 + d))
+}
+
+int_to_ip() {
+    local int="$1"
+    echo "$((int >> 24 & 255)).$((int >> 16 & 255)).$((int >> 8 & 255)).$((int & 255))"
+}
+
+start_int=$(ip_to_int "$start_ip")
+end_int=$(ip_to_int "$end_ip")
+
+input_data=$(cat)
+
+for ((i=start_int; i<=end_int; i++)); do
+    ip=$(int_to_ip "$i")
+    echo "$ip"
+    echo "$input_data" | ssh -q -o StrictHostKeyChecking=no "$ip" 'bash -s' &
+done
+
+wait

@@ -1,0 +1,3 @@
+HIP=$(ip a | grep eth0 | grep inet | cut -f6 -d" ") 
+HSERIAL=$(lshw -c System | grep "serial")
+echo "$HIP:$HSERIAL"

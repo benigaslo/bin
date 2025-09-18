@@ -1,0 +1,9 @@
+killall VirtualBox
+sleep 5
+apt update
+apt purge -y virtualbox-7.2
+apt install -y virtualbox-dkms
+apt purge -y virtualbox-dkms
+wget http://10.2.1.254/share/vb.deb
+dpkg -i vb.deb
+rm vb.deb
